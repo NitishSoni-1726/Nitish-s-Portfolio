@@ -5,14 +5,15 @@ import Loader from "../components/Loader";
 
 export default function Home() {
   const { mode } = useContext(AppContext);
-  const [data, setData] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   setTimeout(() => {
-    setData(true);
+    setLoading(true);
   }, 500);
 
   return (
     <>
-      {data ? (
+      {loading ? (
         <div
           className={`pt-3 w-100 d-flex flex-column align-items-center text-${
             mode ? "light" : "dark"

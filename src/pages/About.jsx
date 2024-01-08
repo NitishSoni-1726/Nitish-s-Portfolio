@@ -1,21 +1,35 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../App";
 import aboutImage from "../assets/images/aboutImage.jpeg";
 import { motion } from "framer-motion";
 import WorkExperienceCard from "../components/WorkExperienceCard";
-import { aboutDescription, workExperience } from "../data/About";
 import Loader from "../components/Loader";
+import { fetchAboutPageDetails } from "../functions/FirebaseFetch";
 
 export default function About() {
   const { mode } = useContext(AppContext);
-  const [data, setData] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState({});
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const aboutDetails = await fetchAboutPageDetails();
+        setData(aboutDetails);
+      } catch (error) {
+        console.error("Error fetching data:", error.message);
+      }
+    }
+    fetchData();
+  }, []);
+
   setTimeout(() => {
-    setData(true);
+    setLoading(true);
   }, 500);
 
   return (
     <>
-      {data ? (
+      {loading ? (
         <div
           className={`p-3 d-flex flex-column align-items-center text-${
             mode ? "light" : "dark"
@@ -40,7 +54,7 @@ export default function About() {
               style={{ width: "370px" }}
               className="p-4 d-flex justify-content-center flex-column align-items-center"
             >
-              {aboutDescription.map((item, index) => {
+              {data.aboutDescription.map((item, index) => {
                 return (
                   <p className="text-center" key={index}>
                     {item}
@@ -50,7 +64,7 @@ export default function About() {
             </motion.div>
           </div>
           <div>
-            {workExperience.map((item) => {
+            {data.workExperience.map((item) => {
               return <WorkExperienceCard data={item} key={item.id} />;
             })}
           </div>

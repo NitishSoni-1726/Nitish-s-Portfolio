@@ -5,6 +5,7 @@ import { faToggleOff, faToggleOn } from "@fortawesome/free-solid-svg-icons";
 
 export default function ModeToggle() {
   const { mode, setMode } = useContext(AppContext);
+
   return (
     <div
       style={{ position: "fixed", top: "63px", right: "10px" }}

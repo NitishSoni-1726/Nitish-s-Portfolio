@@ -16,6 +16,26 @@ async function fetchWebsiteName() {
     }
 }
 
+async function fetchAboutPageDetails() {
+    const aboutDetailsRef = ref(db, "about/");
+    try {
+        const snapshot = await get(aboutDetailsRef);
+        return snapshot.val();
+    } catch (error) {
+        console.error("Error fetching website name:", error.message);
+        throw error;
+    }
+}
 
+async function fetchFooterDetails() {
+    const footerDetailsRef = ref(db, "footer/");
+    try {
+        const snapshot = await get(footerDetailsRef);
+        return snapshot.val();
+    } catch (error) {
+        console.error("Error fetching website name:", error.message);
+        throw error;
+    }
+}
 
-export { fetchWebsiteName };
+export { fetchWebsiteName, fetchAboutPageDetails, fetchFooterDetails };

@@ -4,14 +4,15 @@ import Loader from "../components/Loader";
 
 export default function Resume() {
   const { mode } = useContext(AppContext);
-  const [data, setData] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   setTimeout(() => {
-    setData(true);
+    setLoading(true);
   }, 500);
 
   return (
     <>
-      {data ? (
+      {loading ? (
         <div
           className={`d-flex flex-column align-items-center text-${
             mode ? "light" : "dark"

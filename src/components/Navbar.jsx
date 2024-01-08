@@ -6,6 +6,7 @@ export default function Navbar() {
   const { mode } = useContext(AppContext);
   const { websiteName } = useContext(AppContext);
   const [navCollapsed, isNavCollapsed] = useState(true);
+
   return (
     <nav
       className={`navbar navbar-expand-lg fixed-top ${
