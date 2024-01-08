@@ -1,0 +1,10 @@
+.cursor-follower {
+  position: fixed;
+  pointer-events: none; /* Ensures the cursor doesn't interfere with other elements */
+  font-size: 24px;
+  transform: translate(-50%, -50%);
+}
+
+.cursor {
+  cursor: none;
+}
