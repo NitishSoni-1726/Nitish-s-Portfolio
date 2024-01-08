@@ -6,6 +6,9 @@ import { handleSubmit } from "../functions/PagesFunction";
 const Admin = () => {
   const { mode } = useContext(AppContext);
   const [loading, setLoading] = useState(false);
+  const [loginMessage, setLoginMessage] = useState("");
+  const email = React.createRef();
+  const password = React.createRef();
 
   setTimeout(() => {
     setLoading(true);
@@ -28,9 +31,13 @@ const Admin = () => {
             <h2>Login</h2>
             <form
               className="d-flex flex-column align-items-center"
-              onSubmit={(event) => {
+              onSubmit={async (event) => {
                 event.preventDefault();
-                handleSubmit();
+                const response = await handleSubmit(
+                  email.current.value,
+                  password.current.value
+                );
+                setLoginMessage(response);
               }}
             >
               <label
@@ -39,6 +46,7 @@ const Admin = () => {
               >
                 E-mail
                 <input
+                  ref={email}
                   type="email"
                   className={`p-1 mt-1 rounded bg-transparent text-${
                     mode ? "light" : "dark"
@@ -53,6 +61,7 @@ const Admin = () => {
               >
                 Password
                 <input
+                  ref={password}
                   type="password"
                   className={`p-1 mt-1 rounded bg-transparent text-${
                     mode ? "light" : "dark"
@@ -61,9 +70,10 @@ const Admin = () => {
                   required
                 />
               </label>
+              <p className="text-danger m-0 p-0">{loginMessage}</p>
               <button
                 type="submit"
-                className="btn btn-danger mt-3"
+                className="btn btn-danger mt-2"
                 style={{ width: "250px", cursor: "none" }}
               >
                 Login

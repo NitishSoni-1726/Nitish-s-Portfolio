@@ -38,4 +38,15 @@ async function fetchFooterDetails() {
     }
 }
 
-export { fetchWebsiteName, fetchAboutPageDetails, fetchFooterDetails };
+async function fetchAdminDetails() {
+    const adminRef = ref(db, "admin/");
+    try {
+        const snapshot = await get(adminRef);
+        return snapshot.val();
+    } catch (error) {
+        console.error("Error fetching website name:", error.message);
+        throw error;
+    }
+}
+
+export { fetchWebsiteName, fetchAboutPageDetails, fetchFooterDetails, fetchAdminDetails };
