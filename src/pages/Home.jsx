@@ -23,7 +23,6 @@ export default function Home() {
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
-            whileHover={{ scale: 1.1 }}
             className="d-flex align-items-center justify-content-start w-75"
           >
             <div className="d-flex flex-column align-items-center">

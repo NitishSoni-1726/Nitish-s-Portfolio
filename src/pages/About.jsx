@@ -41,7 +41,6 @@ export default function About() {
               initial={{ opacity: 0, x: -100 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1 }}
-              whileHover={{ scale: 1.02 }}
               className="p-3 pt-0"
               src={aboutImage}
               alt="..."
@@ -63,7 +62,10 @@ export default function About() {
               })}
             </motion.div>
           </div>
-          <div>
+          <div className="mt-4">
+            <h3>Professional Experience</h3>
+          </div>
+          <div style={{ maxWidth: "600px", width: "100%" }}>
             {data.workExperience.map((item) => {
               return <WorkExperienceCard data={item} key={item.id} />;
             })}

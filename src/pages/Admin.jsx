@@ -6,6 +6,7 @@ import { handleSubmit } from "../functions/PagesFunction";
 const Admin = () => {
   const { mode } = useContext(AppContext);
   const [loading, setLoading] = useState(false);
+  const [loginLoader, setLoginLoader] = useState(false);
   const [loginMessage, setLoginMessage] = useState("");
   const email = React.createRef();
   const password = React.createRef();
@@ -18,7 +19,7 @@ const Admin = () => {
     <>
       {loading ? (
         <div
-          style={{ height: "85vh", width: "100%" }}
+          style={{ height: "88vh", width: "100%" }}
           className={`d-flex flex-column align-items-center justify-content-center text-${
             mode ? "light" : "dark"
           }`}
@@ -30,18 +31,23 @@ const Admin = () => {
           >
             <h2>Login</h2>
             <form
+              name="loginForm"
               className="d-flex flex-column align-items-center"
               onSubmit={async (event) => {
                 event.preventDefault();
+                setLoginLoader(true);
                 const response = await handleSubmit(
                   email.current.value,
                   password.current.value
                 );
-                setLoginMessage(response);
+                setTimeout(() => {
+                  setLoginLoader(false);
+                  setLoginMessage(response);
+                }, 1000);
               }}
             >
               <label
-                className="d-flex flex-column m-2"
+                className="d-flex flex-column m-2 mb-1"
                 style={{ width: "250px", cursor: "none" }}
               >
                 E-mail
@@ -56,7 +62,7 @@ const Admin = () => {
                 />
               </label>
               <label
-                className="d-flex flex-column m-2"
+                className="d-flex flex-column m-2 mt-1"
                 style={{ width: "250px", cursor: "none" }}
               >
                 Password
@@ -70,13 +76,20 @@ const Admin = () => {
                   required
                 />
               </label>
-              <p className="text-danger m-0 p-0">{loginMessage}</p>
+              <p
+                style={{ fontWeight: 500, fontSize: "15px" }}
+                className={`text-${
+                  loginMessage === "Success" ? "success" : "danger"
+                } m-0 p-0`}
+              >
+                {loginMessage}
+              </p>
               <button
                 type="submit"
                 className="btn btn-danger mt-2"
                 style={{ width: "250px", cursor: "none" }}
               >
-                Login
+                {loginLoader ? "Loading" : "Login"}
               </button>
             </form>
           </div>
