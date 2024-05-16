@@ -4,12 +4,11 @@ import { AppContext } from "../App";
 
 export default function Navbar() {
   const { mode } = useContext(AppContext);
-  const { websiteName } = useContext(AppContext);
   const [navCollapsed, isNavCollapsed] = useState(true);
 
   return (
     <nav
-      className={`navbar navbar-expand-lg fixed-top ${
+      className={`border-bottom navbar navbar-expand-lg fixed-top ${
         mode ? "bg-dark" : "bg-light"
       }`}
     >
@@ -21,7 +20,7 @@ export default function Navbar() {
             isNavCollapsed(true);
           }}
         >
-          {websiteName}
+          {"<" + "Nitish's Portfolio" + "/>"}
         </Link>
         <button
           className="navbar-toggler"

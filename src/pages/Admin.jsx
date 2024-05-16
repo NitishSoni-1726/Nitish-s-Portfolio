@@ -36,7 +36,7 @@ const Admin = () => {
               onSubmit={async (event) => {
                 event.preventDefault();
                 setLoginLoader(true);
-                const response = await handleSubmit(
+                const response = handleSubmit(
                   email.current.value,
                   password.current.value
                 );
@@ -89,7 +89,7 @@ const Admin = () => {
                 className="btn btn-danger mt-2"
                 style={{ width: "250px", cursor: "none" }}
               >
-                {loginLoader ? "Loading" : "Login"}
+                {loginLoader ? "Validating..." : "Login"}
               </button>
             </form>
           </div>

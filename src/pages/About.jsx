@@ -1,27 +1,14 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { AppContext } from "../App";
 import aboutImage from "../assets/images/aboutImage.jpeg";
 import { motion } from "framer-motion";
 import WorkExperienceCard from "../components/WorkExperienceCard";
 import Loader from "../components/Loader";
-import { fetchAboutPageDetails } from "../functions/FirebaseFetch";
+import { data } from "../data/Data";
 
 export default function About() {
   const { mode } = useContext(AppContext);
   const [loading, setLoading] = useState(false);
-  const [data, setData] = useState({});
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const aboutDetails = await fetchAboutPageDetails();
-        setData(aboutDetails);
-      } catch (error) {
-        console.error("Error fetching data:", error.message);
-      }
-    }
-    fetchData();
-  }, []);
 
   setTimeout(() => {
     setLoading(true);
@@ -53,13 +40,23 @@ export default function About() {
               style={{ width: "370px" }}
               className="p-4 d-flex justify-content-center flex-column align-items-center"
             >
-              {data.aboutDescription.map((item, index) => {
-                return (
-                  <p className="text-center" key={index}>
-                    {item}
-                  </p>
-                );
-              })}
+              <p className="text-center">
+                Hello World ! I'm Nitish Soni. I'm your friendly neighborhood
+                Front - End Developer, weaving code into captivating online
+                experiences.
+              </p>
+              <p className="text-center">
+                But wait, there's more to the story. While I groove to the
+                front-end beats, I'm also dipping my toes into the backend pool,
+                exploring the fascinating world of server-side.
+              </p>
+              <p className="text-center">
+                Think of me as a coding artist in the making, sculpting digital
+                landscapes that are both functional and visually pleasing. If
+                you're up for an adventure in web development where every line
+                of code is a stroke of creativity, let's team up and build
+                something awesome!
+              </p>
             </motion.div>
           </div>
           <div className="mt-4">
